@@ -77,5 +77,29 @@ Copiar código
 python test_app.py
 Os testes automatizados ajudarão a verificar se as funcionalidades da aplicação estão funcionando conforme o esperado, proporcionando um ambiente de aprendizado eficaz para QA testers.
 
+## Testes Manuais 
+Os testes manuais são uma abordagem essencial na garantia de qualidade de software, onde testadores validam funcionalidades e desempenho do sistema através de ações manuais. Eles incluem testes positivos, que verificam se o software atende às expectativas, e testes negativos, que buscam identificar falhas ao introduzir entradas inválidas ou inesperadas.
+
+### Testes Positivos
+* Validação de Entradas: Verifique se o campo de entrada aceita entradas de texto válidas sem quaisquer restrições.
+Placeholder: Confirme que o texto do espaço reservado "Digite uma nova tarefa..." é exibido corretamente quando o campo de entrada está vazio.
+* Variedade de Caracteres: Verifique se o campo de entrada permite que o usuário insira uma variedade de caracteres, incluindo letras, números e caracteres especiais.
+* Limite de Caracteres: Certifique-se de que o campo de entrada lida corretamente com entradas de texto longas, respeitando um limite razoável (por exemplo, 255 caracteres).
+* Limpeza de Campo: Valide se o campo de entrada é limpo corretamente após o envio de uma nova tarefa.
+
+### Testes Negativos
+* Campo Vazio: Tente enviar o campo de entrada sem inserir nenhum texto e verifique se uma mensagem de erro ou indicação é exibida.
+* Espaços em Branco: Teste se o campo de entrada aceita apenas espaços em branco e verifique o feedback de validação.
+* Entradas Longas: Verifique se o campo rejeita entradas de texto que excedem o limite esperado e exibe um erro apropriado.
+* Caracteres Inválidos: Confirme que a inserção de caracteres inválidos (por exemplo, emojis ou caracteres de controle) não travam o aplicativo e são tratadas de maneira adequada.
+* Teclas Especiais: Teste o comportamento do campo de entrada ao pressionar "Enter" sem texto.
+
+### Cenários de Testes Criativos
+* Copia e Cola: Simule um usuário tentando copiar e colar uma longa lista de tarefas no campo de entrada para observar como o aplicativo lida com entradas em massa.
+* Digitação Rápida: Teste o comportamento do campo de entrada ao alternar rapidamente entre digitar e excluir texto, verificando a existência de problemas de desempenho.
+* Atalhos de Teclado: Explore o efeito do uso de atalhos de teclado (como Ctrl+C, Ctrl+V) para garantir que o aplicativo mantém sua funcionalidade e integridade.
+* Interação com Modais: Investigue como o campo de entrada responde quando um usuário tenta inserir texto enquanto um modal ou sobreposição está ativo na página.
+* Condições do Navegador: Avalie o comportamento do campo de entrada sob diferentes condições do navegador (por exemplo, redimensionando a janela, usando diferentes níveis de zoom) para garantir uma experiência consistente do usuário.
+
 ## Licença
 Este projeto está licenciado sob a MIT License.
