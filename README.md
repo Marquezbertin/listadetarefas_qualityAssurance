@@ -26,7 +26,7 @@ Este projeto é uma aplicação web destinada a auxiliar QA testers a treinar e 
 Clone o repositório:
 
 bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/Marquezbertin/listadetarefas_qualityAssurance
 
 Navegue até o diretório do projeto:
 bash
