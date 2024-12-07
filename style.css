@@ -1,3 +1,4 @@
+/* Estilo padrão */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -6,15 +7,20 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
 }
 
-.container {
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 800px;
+.todo-input {
+    margin-bottom: 15px;
+}
+
+.filters button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 .active-filter {
@@ -22,15 +28,41 @@ body {
     color: white;
 }
 
-.task-added {
-    animation: fadeIn 0.5s ease-in-out;
+#task-list {
+    list-style: none;
+    padding: 0;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+#task-list li {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    background: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#task-list li.completed span {
+    text-decoration: line-through;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Modo escuro */
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode #task-list li {
+    background: #333;
+    border-color: #555;
+}
+
+.dark-mode .filters button {
+    color: #ddd;
 }

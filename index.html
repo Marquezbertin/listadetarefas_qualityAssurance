@@ -12,60 +12,33 @@
     <div class="intro">
         <h1>Projetos para Testes de Software</h1>
         <p>Esta aplicação web tem como objetivo auxiliar QA testers a treinar e aprender a encontrar erros, utilizando
-            uma lista de tarefas. Também é possível utilizar a lista para a criação de uma lista de casos de teste,
-            porém o objetivo principal é oferecer a oportunidade de conhecer suas funcionalidades de forma prática e
-            eficiente.</p>
-        <h2>Passo a Passo: Como Criar e Gerenciar Casos de Teste na Aplicação</h2>
-        <ol>
-            <li><strong>Acesse a Aplicação:</strong> Abra seu navegador e acesse o link da aplicação. Você verá uma
-                página com uma introdução e uma lista de tarefas.</li>
-            <li><strong>Compreenda a Interface:</strong> A parte superior da página apresenta uma descrição da
-                aplicação. Abaixo, você encontrará uma seção onde pode adicionar novos casos de teste, seguida por uma
-                lista dos casos de teste existentes.</li>
-            <li><strong>Adicionando um Novo Caso de Teste:</strong> Localize o campo de entrada onde está escrito
-                “Digite uma nova tarefa...”. Clique nesse campo e digite o nome do seu novo caso de teste. Depois de
-                inserir o texto, clique no botão “Adicionar”. O novo caso de teste será adicionado à lista abaixo.</li>
-            <li><strong>Editando um Caso de Teste:</strong> Na lista de casos de teste, encontre o caso que você deseja
-                editar. Clique duas vezes no texto do caso de teste para ativar o modo de edição. Faça as alterações
-                necessárias e depois clique fora do campo de edição para salvar.</li>
-            <li><strong>Excluindo um Caso de Teste:</strong> Para remover um caso de teste da lista, localize o botão de
-                exclusão (geralmente identificado como um ícone de lixeira) ao lado do caso. Clique no botão de
-                exclusão. Uma confirmação pode aparecer; confirme a exclusão para removê-lo da lista.</li>
-            <li><strong>Filtrando Casos de Teste:</strong> Abaixo da seção de entrada, você encontrará três botões para
-                filtrar os casos de teste: "Todas", "Concluídas" e "Pendentes". Clique em “Todas” para ver todos os
-                casos de teste. Clique em “Concluídas” para visualizar apenas os casos que foram concluídos. Clique em
-                “Pendentes” para ver os casos que ainda precisam ser finalizados.</li>
-            <li><strong>Revisando Seus Casos de Teste:</strong> Revise a lista de casos de teste para garantir que tudo
-                está atualizado e organizado. Você pode usar a função de filtro para visualizar casos específicos e
-                facilitar a revisão.</li>
-        </ol>
+            uma lista de tarefas. É possível criar, editar, excluir, e filtrar tarefas, ajudando os usuários a praticar testes de software em funcionalidades comuns.</p>
     </div>
 
     <div class="container">
         <h1>Lista de Tarefas</h1>
         <div class="todo-input">
             <label for="new-task">Adicionar nova tarefa:</label>
-            <input type="text" id="new-task" placeholder="Digite uma nova tarefa..." maxlength="70"
-                oninput="updateCharacterCount()" />
+            <input type="text" id="new-task" placeholder="Digite uma nova tarefa..." maxlength="70" oninput="updateCharacterCount()">
             <span id="char-count">70 caracteres restantes.</span>
-            <button onclick="TaskManager.addTask()">Adicionar</button>
+            <button id="add-task-btn">Adicionar</button>
         </div>
 
         <!-- Botões de filtro -->
         <div class="filters">
-            <button onclick="TaskManager.filterTasks('all')" class="active-filter" id="filter-all">Todas</button>
-            <button onclick="TaskManager.filterTasks('completed')" id="filter-completed">Concluídas</button>
-            <button onclick="TaskManager.filterTasks('pending')" id="filter-pending">Pendentes</button>
+            <button id="filter-all" class="active-filter" onclick="TaskManager.filterTasks('all')">Todas</button>
+            <button id="filter-completed" onclick="TaskManager.filterTasks('completed')">Concluídas</button>
+            <button id="filter-pending" onclick="TaskManager.filterTasks('pending')">Pendentes</button>
         </div>
 
         <ul id="task-list"></ul>
-        <button onclick="TaskManager.clearTasks()">Limpar Todas</button>
+        <button id="clear-tasks-btn">Limpar Todas</button>
     </div>
 
     <footer>
         <p>&copy; 2024 QA Bruno Bertin Marquez. Todos os direitos reservados.</p>
         <p>Entre em contato: <a href="mailto:bertinmarquez84@gmail.com">bertinmarquez84@gmail.com</a></p>
-        <button onclick="toggleDarkMode()">Alternar Modo Escuro</button>
+        <button id="dark-mode-toggle">Alternar Modo Escuro</button>
     </footer>
 
     <script src="script.js"></script>
