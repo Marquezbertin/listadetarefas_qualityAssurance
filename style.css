@@ -1,110 +1,36 @@
-/* Reseta algumas configurações padrões */
-* {
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
-
-.intro {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 800px;
-}
-
-.intro h1 {
-    margin-bottom: 15px;
-    color: #2c3e50;
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
 }
 
 .container {
-    background: #ffffff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
+    margin: 0 auto;
     max-width: 800px;
 }
 
-.todo-input {
-    display: flex;
-    margin-bottom: 15px;
-}
-
-.todo-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-right: 10px;
-    font-size: 16px;
-}
-
-.todo-input button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #28a745;
+.active-filter {
+    background-color: #007BFF;
     color: white;
-    cursor: pointer;
-    font-size: 16px;
 }
 
-.todo-input button:hover {
-    background-color: #218838;
+.task-added {
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-.filters {
-    margin-bottom: 15px;
-}
-
-.filters button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    margin-right: 5px;
-}
-
-.filters button:hover {
-    background-color: #0056b3;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul li {
-    background: #f8f9fa;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    background: #343a40;
-    color: #ffffff;
-    border-radius: 8px;
-}
-
-footer a {
-    color: #ffffff;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

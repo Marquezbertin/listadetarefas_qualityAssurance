@@ -44,23 +44,28 @@
     <div class="container">
         <h1>Lista de Tarefas</h1>
         <div class="todo-input">
-            <input type="text" id="new-task" placeholder="Digite uma nova tarefa..." maxlength="70">
-            <button onclick="addTask()">Adicionar</button>
+            <label for="new-task">Adicionar nova tarefa:</label>
+            <input type="text" id="new-task" placeholder="Digite uma nova tarefa..." maxlength="70"
+                oninput="updateCharacterCount()" />
+            <span id="char-count">70 caracteres restantes.</span>
+            <button onclick="TaskManager.addTask()">Adicionar</button>
         </div>
 
         <!-- Botões de filtro -->
         <div class="filters">
-            <button onclick="filterTasks('all')">Todas</button>
-            <button onclick="filterTasks('completed')">Concluídas</button>
-            <button onclick="filterTasks('pending')">Pendentes</button>
+            <button onclick="TaskManager.filterTasks('all')" class="active-filter" id="filter-all">Todas</button>
+            <button onclick="TaskManager.filterTasks('completed')" id="filter-completed">Concluídas</button>
+            <button onclick="TaskManager.filterTasks('pending')" id="filter-pending">Pendentes</button>
         </div>
 
         <ul id="task-list"></ul>
+        <button onclick="TaskManager.clearTasks()">Limpar Todas</button>
     </div>
 
     <footer>
         <p>&copy; 2024 QA Bruno Bertin Marquez. Todos os direitos reservados.</p>
         <p>Entre em contato: <a href="mailto:bertinmarquez84@gmail.com">bertinmarquez84@gmail.com</a></p>
+        <button onclick="toggleDarkMode()">Alternar Modo Escuro</button>
     </footer>
 
     <script src="script.js"></script>

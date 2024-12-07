@@ -1,124 +1,110 @@
-// Carrega as tarefas do localStorage ao iniciar
-document.addEventListener('DOMContentLoaded', loadTasks);
+const TaskManager = {
+    tasks: JSON.parse(localStorage.getItem("tasks")) || [],
 
-// Função para adicionar uma nova tarefa
-function addTask() {
-    const taskInput = document.getElementById('new-task');
-    const taskText = taskInput.value.trim();
+    saveTasks: function () {
+        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    },
 
-    if (taskText === '') {
-        alert('Por favor, digite uma tarefa.');
-        return;
-    }
-
-    const taskItem = createTaskElement(taskText, false);
-    document.getElementById('task-list').appendChild(taskItem);
-
-    saveTask(taskText, false);
-    taskInput.value = '';
-}
-
-// Cria o elemento HTML de uma tarefa com opções de edição e status
-function createTaskElement(taskText, completed) {
-    const taskItem = document.createElement('li');
-
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = completed;
-    checkbox.onchange = function() { toggleCompleted(taskItem, taskText); };
-
-    const taskSpan = document.createElement('span');
-    taskSpan.textContent = taskText;
-    taskSpan.contentEditable = true;
-    taskSpan.onblur = function() { updateTaskText(taskItem, taskSpan.textContent); };
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Excluir';
-    deleteBtn.classList.add('delete-btn');
-    deleteBtn.onclick = function() { deleteTask(taskItem); };
-
-    if (completed) taskItem.classList.add('completed');
-
-    taskItem.appendChild(checkbox);
-    taskItem.appendChild(taskSpan);
-    taskItem.appendChild(deleteBtn);
-
-    return taskItem;
-}
-
-// Atualiza o status de conclusão de uma tarefa
-function toggleCompleted(taskItem, taskText) {
-    taskItem.classList.toggle('completed');
-    const completed = taskItem.classList.contains('completed');
-    updateTaskStatus(taskText, completed);
-}
-
-// Atualiza o texto de uma tarefa no localStorage
-function updateTaskText(taskItem, newText) {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const oldText = taskItem.querySelector('span').textContent;
-    const taskIndex = tasks.findIndex(task => task.text === oldText);
-    
-    if (taskIndex !== -1) {
-        tasks[taskIndex].text = newText;
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
-}
-
-// Exclui uma tarefa e atualiza no localStorage
-function deleteTask(taskItem) {
-    const taskText = taskItem.querySelector('span').textContent;
-    taskItem.remove();
-    removeTaskFromStorage(taskText);
-}
-
-// Salva uma nova tarefa no localStorage
-function saveTask(taskText, completed) {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.push({ text: taskText, completed: completed });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-// Atualiza o status de conclusão de uma tarefa no localStorage
-function updateTaskStatus(taskText, completed) {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const taskIndex = tasks.findIndex(task => task.text === taskText);
-    if (taskIndex !== -1) {
-        tasks[taskIndex].completed = completed;
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
-}
-
-// Remove uma tarefa do localStorage
-function removeTaskFromStorage(taskText) {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const updatedTasks = tasks.filter(task => task.text !== taskText);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-}
-
-// Carrega as tarefas do localStorage e exibe
-function loadTasks() {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.forEach(task => {
-        const taskItem = createTaskElement(task.text, task.completed);
-        document.getElementById('task-list').appendChild(taskItem);
-    });
-}
-
-// Filtra as tarefas
-function filterTasks(status) {
-    const tasks = document.querySelectorAll('#task-list li');
-    tasks.forEach(task => {
-        switch(status) {
-            case 'all':
-                task.style.display = 'flex';
-                break;
-            case 'completed':
-                task.style.display = task.classList.contains('completed') ? 'flex' : 'none';
-                break;
-            case 'pending':
-                task.style.display = task.classList.contains('completed') ? 'none' : 'flex';
-                break;
+    addTask: function () {
+        const taskInput = document.getElementById("new-task");
+        const taskText = taskInput.value.trim();
+        if (!taskText) {
+            alert("A tarefa não pode estar vazia.");
+            return;
         }
-    });
+
+        this.tasks.push({ text: taskText, completed: false });
+        taskInput.value = "";
+        updateCharacterCount();
+        this.saveTasks();
+        this.renderTasks();
+    },
+
+    deleteTask: function (index) {
+        if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
+            this.tasks.splice(index, 1);
+            this.saveTasks();
+            this.renderTasks();
+        }
+    },
+
+    toggleComplete: function (index) {
+        this.tasks[index].completed = !this.tasks[index].completed;
+        this.saveTasks();
+        this.renderTasks();
+    },
+
+    filterTasks: function (type) {
+        document.querySelectorAll(".filters button").forEach((button) => button.classList.remove("active-filter"));
+        document.getElementById(`filter-${type}`).classList.add("active-filter");
+        this.renderTasks(type);
+    },
+
+    clearTasks: function () {
+        if (confirm("Tem certeza que deseja limpar todas as tarefas?")) {
+            this.tasks = [];
+            this.saveTasks();
+            this.renderTasks();
+        }
+    },
+
+    renderTasks: function (filter = "all") {
+        const taskList = document.getElementById("task-list");
+        taskList.innerHTML = "";
+
+        const filteredTasks = this.tasks.filter((task) =>
+            filter === "all"
+                ? true
+                : filter === "completed"
+                ? task.completed
+                : !task.completed
+        );
+
+        filteredTasks.forEach((task, index) => {
+            const li = document.createElement("li");
+            li.className = "task-added";
+
+            const textSpan = document.createElement("span");
+            textSpan.textContent = task.text;
+            textSpan.ondblclick = () => this.editTask(index);
+            if (task.completed) {
+                textSpan.style.textDecoration = "line-through";
+            }
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Excluir";
+            deleteBtn.onclick = () => this.deleteTask(index);
+
+            const completeBtn = document.createElement("button");
+            completeBtn.textContent = task.completed ? "Desfazer" : "Concluir";
+            completeBtn.onclick = () => this.toggleComplete(index);
+
+            li.appendChild(textSpan);
+            li.appendChild(completeBtn);
+            li.appendChild(deleteBtn);
+
+            taskList.appendChild(li);
+        });
+    },
+
+    editTask: function (index) {
+        const newText = prompt("Edite a tarefa:", this.tasks[index].text);
+        if (newText) {
+            this.tasks[index].text = newText.trim();
+            this.saveTasks();
+            this.renderTasks();
+        }
+    },
+};
+
+function updateCharacterCount() {
+    const input = document.getElementById("new-task");
+    const maxLength = input.maxLength;
+    document.getElementById("char-count").textContent = `${maxLength - input.value.length} caracteres restantes.`;
 }
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+}
+
+document.addEventListener("DOMContentLoaded", () => TaskManager.renderTasks());
