@@ -1,0 +1,29 @@
+Relatório de Testes:
+Data e Hora: 2025-06-07 12:07:01
+Teste: Limpar campo de entrada
+Descrição: Verifica se o campo de entrada pode ser limpo após inserir texto.
+Resultado Esperado: 
+Resultado Encontrado: 
+Resultado: PASSOU
+--------------------------------------------------
+Data e Hora: 2025-06-07 12:07:01
+Teste: Inserir nova tarefa
+Descrição: Verifica se o campo de entrada aceita texto e exibe o valor inserido.
+Resultado Esperado: Buy groceries
+Resultado Encontrado: Buy groceries
+Resultado: PASSOU
+--------------------------------------------------
+Data e Hora: 2025-06-07 12:07:01
+Teste: Limite máximo de caracteres
+Descrição: Verifica se o campo de entrada possui um limite máximo de 70 caracteres.
+Resultado Esperado: 70
+Resultado Encontrado: 70
+Resultado: PASSOU
+--------------------------------------------------
+Data e Hora: 2025-06-07 12:07:01
+Teste: Placeholder do campo de entrada
+Descrição: Verifica se o campo de entrada exibe o placeholder correto.
+Resultado Esperado: Digite uma nova tarefa...
+Resultado Encontrado: Digite uma nova tarefa...
+Resultado: PASSOU
+--------------------------------------------------
